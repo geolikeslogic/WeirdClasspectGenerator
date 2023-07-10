@@ -30,7 +30,7 @@ tree = commands.CommandTree(client)
         commands.Choice(name="True", value=1),
         commands.Choice(name="False", value=0),]
         )
-async def ClasspectsCommand(interaction, amount:int=4, mode:int=0,farragofiction:int=0):
+async def ClasspectsCommand(interaction, amount:int=4, mode:int=1,farragofiction:int=0):
     message = generateMessage(amount,mode,farragofiction)
     await interaction.response.send_message(message)
 
