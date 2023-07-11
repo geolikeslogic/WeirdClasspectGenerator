@@ -32,5 +32,9 @@ def generateClasspect(mode=0,farragofiction=False,wordList=words):
             Class,Aspect=getWord(CanonClasses if canonPart==0 else wordList),getWord(CanonAspects if canonPart==1 else wordList)
         case 3:
             Class,Aspect=getWord(CanonClasses),getWord(CanonAspects)
+        case 4:
+            Class,Aspect=getWord(CanonClasses),getWord(wordList)
+        case 5:
+            Class,Aspect=getWord(wordList),getWord(CanonAspects)
 
     return(f"{Class} of {Aspect}")

@@ -2,8 +2,8 @@ from classpectGenerator import generateClasspect
 
 MAXCLASSPECTS=16
 
-def generateMessage(amount:int,mode:int,farragofiction:bool):
-    if not 1<=amount<=MAXCLASSPECTS:
+def generateMessage(isadmin:bool,amount:int,mode:int,farragofiction:bool):
+    if not ((1<=amount) and (isadmin or amount<=MAXCLASSPECTS)):
         return "That is not a valid amount of classpects!"
     
     messageBase="Here are your classpects:\n```{}```"
