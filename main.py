@@ -17,8 +17,10 @@ tree = commands.CommandTree(client)
 
 @tree.command(name = "generateclasspects", description = "Generate a list of up to 16 bogus Classpects.", guild=discord.Object(id=SERVERID))
 @commands.describe(amount="The number of Classpects to generate. (Max = 16)",
-                   mode="Determines how the classpects are generated.",
-                   farragofiction="Determines whether or not Farragofiction classes and aspects are considered canon. (Has no effect on Chaos Mode)")
+                    mode="Determines how the classpects are generated.",
+                    farragofiction="Determines whether or not Farragofiction classes and aspects are considered canon. (Has no effect on Chaos Mode)",
+                    minimum="Determines the minimum size of each word.",
+                    maximum="Determines the maximum size of each word.")
 @commands.choices(
         mode=[
         commands.Choice(name="Chaos", value=0),
@@ -32,9 +34,9 @@ tree = commands.CommandTree(client)
         commands.Choice(name="True", value=1),
         commands.Choice(name="False", value=0),]
         )
-async def ClasspectsCommand(interaction, amount:int=4, mode:int=1,farragofiction:int=0):
+async def ClasspectsCommand(interaction, amount:int=4, mode:int=1,farragofiction:int=0, minimum:int=3, maximum:int=50):
     isadmin = interaction.user.guild_permissions.administrator
-    message = generateMessage(isadmin,amount,mode,farragofiction)
+    message = generateMessage(isadmin,amount,mode,farragofiction,minimum,maximum)
     await interaction.response.send_message(message)
 
 @client.event
