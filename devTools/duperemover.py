@@ -1,5 +1,5 @@
 output = []
-with open('wordsNew.txt', 'r') as inputFile:
+with open('WordLists/words.txt', 'r') as inputFile:
     lines = inputFile.readlines()
     count = len(lines)
     dupes = 0   
@@ -10,5 +10,5 @@ with open('wordsNew.txt', 'r') as inputFile:
             dupes+=1
             
 
-with open("wordsNew.txt", "w") as outputFile:
+with open("WordLists/words.txt", "w") as outputFile:
     outputFile.writelines(output)

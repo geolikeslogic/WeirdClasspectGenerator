@@ -1,10 +1,10 @@
 import random
+from wordlists import wordList
 
-wordsFile = open('wordsNew.txt', 'r') 
-words = wordsFile.readlines()
-wordsFile.close()
-
-CLASSES,ASPECTS="Lord,Muse,Seer,Mage,Heir,Witch,Sylph,Maid,Bard,Prince,Page,Knight,Rogue,Thief,Smith,Waste,Grace,Guide,Sage,Scout,Scribe".split(","),"Space,Time,Light,Void,Breath,Blood,Mind,Heart,Life,Doom,Hope,Rage,Dreams,Law".split(",")
+classFile,aspectFile=open("WordLists/CanonClasses.txt","r"),open("WordLists/CanonAspects.txt","r")
+CLASSES,ASPECTS=classFile.readlines(),aspectFile.readlines()
+classFile.close()
+aspectFile.close()
 
 def formatWord(word):
     return word[0].upper()+word[1:]
@@ -16,25 +16,26 @@ def getWord(wordList,minimum=0,maximum=20):
         if word[-1]=="\n": word = word[:-1]
     return formatWord(word)
 
-def generateClasspect(mode=0,farragofiction=False,minimum=3,maximum=100,wordList=words):
+def generateClasspect(mode=0,farragofiction=False,minimum=3,maximum=100,wordList=[]):
     Class,Aspect="",""
-    CanonClasses,CanonAspects=CLASSES.copy(),ASPECTS.copy()
+    CanonClasses,CanonAspects=CLASSES,ASPECTS
+    getWordLambda = lambda list: getWord(list,minimum,maximum)
     if not farragofiction:
-        CanonClasses,CanonAspects=CanonClasses[:13],CanonAspects[:13]
+        CanonClasses,CanonAspects=CanonClasses[:15],CanonAspects[:13]
     match mode:
         case 0:
-            Class,Aspect=getWord(wordList,minimum,maximum),getWord(wordList,minimum,maximum)
+            Class,Aspect=getWordLambda(wordList),getWordLambda(wordList)
         case 1:
-            Class,Aspect=getWord(wordList,minimum,maximum),getWord(wordList,minimum,maximum)
+            Class,Aspect=getWordLambda(wordList),getWordLambda(wordList)
             if (Class in ASPECTS) or (Aspect in CLASSES): Class,Aspect=Aspect,Class
         case 2:
             canonPart=random.randint(0,1)==1
-            Class,Aspect=getWord(CanonClasses if canonPart==0 else wordList,minimum,maximum),getWord(CanonAspects if canonPart==1 else wordList,minimum,maximum)
+            Class,Aspect=getWordLambda(CanonClasses if canonPart==0 else wordList),getWordLambda(CanonAspects if canonPart==1 else wordList)
         case 3:
-            Class,Aspect=getWord(CanonClasses),getWord(CanonAspects)
+            Class,Aspect=getWordLambda(CanonClasses),getWordLambda(CanonAspects)
         case 4:
-            Class,Aspect=getWord(CanonClasses),getWord(wordList,minimum,maximum)
+            Class,Aspect=getWordLambda(CanonClasses),getWordLambda(wordList)
         case 5:
-            Class,Aspect=getWord(wordList,minimum,maximum),getWord(CanonAspects)
+            Class,Aspect=getWordLambda(wordList),getWordLambda(CanonAspects)
 
     return(f"{Class} of {Aspect}")

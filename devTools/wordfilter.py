@@ -126,9 +126,9 @@ def sylco(word) :
     # calculate the output
     return numVowels - disc + syls
 
-with open("wordsNew.txt", "w") as outputFile:
+with open("WordLists/words.txt", "w") as outputFile:
     output = []
-    with open('words.txt', 'r') as inputFile:
+    with open('WordLists/words.txt', 'r') as inputFile:
         lines = inputFile.readlines()
         count = len(lines)
         prev = ""
