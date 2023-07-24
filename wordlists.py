@@ -10,6 +10,8 @@ class wordList:
         self.blacklist=[]
         if not file: return
         for word in file.readlines():
+            if word[-1]=="\n":
+                word=word[:-1]
             match word[0]:
                 case '~':
                     self.explicit.append(word[1:])

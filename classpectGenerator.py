@@ -1,8 +1,9 @@
 import random
-from wordlists import wordList
+
+def trim(list): return [(word[:-1] if word[-1]=="\n" else word) for word in list]
 
 classFile,aspectFile=open("WordLists/CanonClasses.txt","r"),open("WordLists/CanonAspects.txt","r")
-CLASSES,ASPECTS=classFile.readlines(),aspectFile.readlines()
+CLASSES,ASPECTS=trim(classFile.readlines()),trim(aspectFile.readlines())
 classFile.close()
 aspectFile.close()
 
@@ -13,7 +14,6 @@ def getWord(wordList,minimum=0,maximum=20):
     word=""
     while (not word) or (not minimum<=len(word)<=maximum):
         word = random.choice(wordList)
-        if word[-1]=="\n": word = word[:-1]
     return formatWord(word)
 
 def generateClasspect(mode=0,farragofiction=False,minimum=3,maximum=100,wordList=[]):
@@ -21,7 +21,7 @@ def generateClasspect(mode=0,farragofiction=False,minimum=3,maximum=100,wordList
     CanonClasses,CanonAspects=CLASSES,ASPECTS
     getWordLambda = lambda list: getWord(list,minimum,maximum)
     if not farragofiction:
-        CanonClasses,CanonAspects=CanonClasses[:15],CanonAspects[:13]
+        CanonClasses,CanonAspects=CanonClasses[:14],CanonAspects[:12]
     match mode:
         case 0:
             Class,Aspect=getWordLambda(wordList),getWordLambda(wordList)
