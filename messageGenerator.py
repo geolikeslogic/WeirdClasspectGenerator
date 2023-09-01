@@ -3,7 +3,7 @@ from wordlists import getWordList
 
 MAXCLASSPECTS=16
 
-def generateMessage(interaction,amount:int,mode:int,farragofiction:bool,minimum:int,maximum:int,custom:int,explicit:int):
+def generateMessage(interaction,amount:int,mode:int,farragofiction:bool,minimum:int,maximum:int,custom:int,explicit:int,masterclasses:int):
     wordList = getWordList(interaction.guild_id,explicit,custom)
     
     if 1>amount:
@@ -15,7 +15,7 @@ def generateMessage(interaction,amount:int,mode:int,farragofiction:bool,minimum:
     if amount == 1: messageBase="Here is your classpect:\n```{}```"
 
 
-    classpects = "\n".join(generateClasspect(mode,farragofiction,minimum,maximum,wordList) for _ in range(amount))
+    classpects = "\n".join(generateClasspect(mode,farragofiction,minimum,maximum,wordList,masterclasses) for _ in range(amount))
 
     if len(classpects)>2000:return "That message is larger than discord will allow! (2000 characters)"
 

@@ -24,6 +24,7 @@ tree = commands.CommandTree(client)
 @commands.describe(amount="The number of Classpects to generate. (Max = 16)",
                     mode="Determines how the classpects are generated.",
                     farragofiction="Determines whether or not Farragofiction classes and aspects are considered canon. (Has no effect on Chaos Mode)",
+                    masterclasses="Determines whether or not Master Classes (Muse and Lord) appear. (Has no effect on Chaos Mode)",
                     minimum="Determines the minimum size of each word.",
                     maximum="Determines the maximum size of each word.",
                     custom="Determines whether the words from the server's custom words list is used.",
@@ -47,10 +48,13 @@ tree = commands.CommandTree(client)
         explicit=[
         commands.Choice(name="True", value=1),
         commands.Choice(name="False", value=0),],
+        masterclasses=[
+        commands.Choice(name="True", value=1),
+        commands.Choice(name="False", value=0),],
         )
 
-async def ClasspectsCommand(interaction, amount:int=4, mode:int=1,farragofiction:int=0, minimum:int=3, maximum:int=50, custom:int=2, explicit:int=1):
-    message = generateMessage(interaction,amount,mode,farragofiction,minimum,maximum,custom,explicit)
+async def ClasspectsCommand(interaction, amount:int=4, mode:int=1,farragofiction:int=0, minimum:int=3, maximum:int=50, custom:int=2, explicit:int=1, masterclasses:int=0,):
+    message = generateMessage(interaction,amount,mode,farragofiction,minimum,maximum,custom,explicit,masterclasses)
     await interaction.response.send_message(message)
 
 #@tree.command(name = "addcustomwords", description = "Add words to the server's custom words list.", guild=discord.Object(id=SERVERID))

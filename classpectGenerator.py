@@ -16,12 +16,14 @@ def getWord(wordList,minimum=0,maximum=20):
         word = random.choice(wordList)
     return formatWord(word)
 
-def generateClasspect(mode=0,farragofiction=False,minimum=3,maximum=100,wordList=[]):
+def generateClasspect(mode=0,farragofiction=False,minimum=3,maximum=100,wordList=[],masterclasses=True):
     Class,Aspect="",""
     CanonClasses,CanonAspects=CLASSES,ASPECTS
     getWordLambda = lambda list: getWord(list,minimum,maximum)
     if not farragofiction:
         CanonClasses,CanonAspects=CanonClasses[:14],CanonAspects[:12]
+    if not masterclasses:
+        CanonClasses=CanonClasses[2:]
     match mode:
         case 0:
             Class,Aspect=getWordLambda(wordList),getWordLambda(wordList)
